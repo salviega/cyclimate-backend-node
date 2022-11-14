@@ -19,6 +19,16 @@ const fetchData = async (typeData) => {
         "http://ec2-34-207-93-96.compute-1.amazonaws.com:8088/last_data/?token=0ce956fc-131b-42d6-a4b1-8e8319e45f84"
       );
       return response.data;
+    case "counter":
+      response = await axios.get(
+        "http://ec2-34-207-93-96.compute-1.amazonaws.com:8088/query_drop/?token=0ce956fc-131b-42d6-a4b1-8e8319e45f84"
+      );
+      return response.data;
+    case "redeem":
+      response = await axios.get(
+        "http://ec2-34-207-93-96.compute-1.amazonaws.com:8088/claim_drop/?token=0ce956fc-131b-42d6-a4b1-8e8319e45f84&user=user2"
+      );
+      return response.data;
     default:
       return [];
   }
@@ -31,6 +41,16 @@ app.get("/lastest", async (req, res) => {
   const data = await fetchData("graphInformation");
   res.set("Access-Control-Allow-Origin", "*");
   res.send(data);
+});
+
+app.get("/counter", async (req, res) => {
+  const data = await fetchData("counter");
+  res.send({ data });
+});
+
+app.get("/redeem", async (req, res) => {
+  const data = await fetchData("redeem");
+  res.send({ data });
 });
 
 app.get("/allNFTs", async (req, res) => {
