@@ -9,7 +9,7 @@ const MORALIS_API_KEY = process.env.MORALIS_API_KEY;
 const moralis = Moralis.default;
 const chain = EvmChain.FUJI;
 const app = express();
-const port = 8080;
+const PORT = process.env.PORT || 3001;
 
 const fetchData = async (typeData) => {
   let response;
@@ -36,7 +36,6 @@ const fetchData = async (typeData) => {
 
 app.use(cors());
 app.use(express.json());
-app.set("port", process.env.PORT || 3000);
 
 app.get("/lastest", async (req, res) => {
   const data = await fetchData("graphInformation");
@@ -83,7 +82,7 @@ moralis
     apiKey: MORALIS_API_KEY,
   })
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Server is running on port ${app.get("port")} 🎈`);
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT} 🎈`);
     });
   });
