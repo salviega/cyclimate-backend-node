@@ -7,7 +7,7 @@ import { EvmChain } from "@moralisweb3/evm-utils";
 dotenv.config();
 const MORALIS_API_KEY = process.env.MORALIS_API_KEY;
 const moralis = Moralis.default;
-const chain = EvmChain.FUJI;
+const chain = EvmChain.MUMBAI;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
