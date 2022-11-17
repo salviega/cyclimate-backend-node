@@ -28,7 +28,16 @@ const fetchData = async (typeData) => {
       response = await axios.get(
         "http://ec2-34-207-93-96.compute-1.amazonaws.com:8088/claim_drop/?token=0ce956fc-131b-42d6-a4b1-8e8319e45f84&user=user2"
       );
+      console.log(response.data);
       return response.data;
+    case "burned":
+      response = {
+        cid: "UNO",
+        ret_url: "DOS",
+        claim: 2,
+      };
+      console.log(response);
+      return response;
     default:
       return [];
   }
@@ -50,6 +59,11 @@ app.get("/counter", async (req, res) => {
 
 app.get("/redeem", async (req, res) => {
   const data = await fetchData("redeem");
+  res.send({ data });
+});
+
+app.get("/burned", async (req, res) => {
+  const data = await fetchData("burned");
   res.send({ data });
 });
 
